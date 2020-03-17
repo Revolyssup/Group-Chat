@@ -13,7 +13,6 @@ socket.emit(`name`, name);
 socket.on(`name`,(name)=>{AppendMsg(`${name} joined`)});
 
 socket.on(`typing`,(name)=>{
-    console.log(`recieved typing`);
     if(typing.classList.contains(`hide`))
     {
         typing.classList.remove(`hide`);
@@ -31,7 +30,6 @@ socket.on(`disconnected`,(name)=>{
 
 
 msg.addEventListener(`keydown`,()=>{
-    console.log(`emitted`);
     socket.emit(`typing`, name);
 } )
 
