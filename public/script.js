@@ -2,6 +2,8 @@ const socket=io(`/`)
 const msgCont=document.getElementById(`message-container`)
 const send=document.getElementById(`send-container`)
 const msg=document.getElementById(`message-input`)
+const typing=document.getElementById(`typing`)
+
 
 socket.on(`chat-message`,(name,dataJson)=>{AppendMsg(`${name}-${dataJson}`)})
 
@@ -10,16 +12,39 @@ AppendMsg(`You joined`);
 socket.emit(`name`, name);
 socket.on(`name`,(name)=>{AppendMsg(`${name} joined`)});
 
+socket.on(`typing`,(name)=>{
+    console.log(`recieved typing`);
+    if(typing.classList.contains(`hide`))
+    {
+        typing.classList.remove(`hide`);
+        typing.innerText=`${name} is typing...`;
+        setTimeout(()=>{
+            typing.classList.add(`hide`);
+        },500);
+    }
+    
+});
+
 socket.on(`disconnected`,(name)=>{
     AppendMsg(`${name} disconnected`)
-})
+});
+
+
+msg.addEventListener(`keydown`,()=>{
+    console.log(`emitted`);
+    socket.emit(`typing`, name);
+} )
 
 send.addEventListener(`submit`,event=>{
     event.preventDefault();
-    const msgValue=msg.value;
-    socket.emit(`new-msg`, msgValue);
-    msg.value=``;
-    AppendMsg(`You-${msgValue}`)
+    const msgValue=msg.value.trim();
+    if(msgValue==``){
+        alert(`Empty String.Enter some text`)
+    }else{
+        msg.value=``;
+        AppendMsg(`You-${msgValue}`)
+        socket.emit(`chat-msg`,msgValue);
+    }
    
 })
 
@@ -28,3 +53,5 @@ function AppendMsg(data){
     msgElement.innerHTML=data;
     msgCont.append(msgElement)
 } 
+
+

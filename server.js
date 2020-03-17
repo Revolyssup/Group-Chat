@@ -12,7 +12,7 @@ function cbOnconnect(socket){
  
     
     console.log(`new user`);
-    socket.on(`new-msg`,msg=>{
+    socket.on(`chat-msg`,msg=>{
         const name= users[socket.id]
         socket.broadcast.emit(`chat-message`,name, msg)
         console.log(`recieved`)
@@ -24,6 +24,11 @@ function cbOnconnect(socket){
     socket.on(`disconnect`,()=>{
         socket.broadcast.emit(`disconnected`, users[socket.id]);
         delete users[socket.id]
+    })
+
+    socket.on(`typing`,(name)=>{
+        socket.broadcast.emit(`typing`, name);
+       
     })
 }  
 
