@@ -4,7 +4,11 @@ const send=document.getElementById(`send-container`)
 const msg=document.getElementById(`message-input`)
 const typing=document.getElementById(`typing`)
 
-/*Listens for incoming message from other connected clients and passes received name and message as argument to AppendMsg function, in order to add the message on DOM along with sender's name*/
+/*
+*Listens for incoming message from other connected clients 
+*and passes received name and message as argument to AppendMsg function,
+*in order to add the message on DOM along with sender's name
+*/
 socket.on(`chat-message`,(name,dataJson)=>{AppendMsg(`${name}-${dataJson}`)})
 
 //Asks for client's name to send to server
@@ -12,13 +16,19 @@ const name=prompt(`Enter name `);
 AppendMsg(`You joined`);
 
 
-/*sends the name of the client to server*/
+//sends the name of the client to server
 socket.emit(`name`, name);
 
-/*server broadcasts name of joined client to all other clients which is received here and received name is passed as argument to AppendMsg function which in turn updates it on the DOM*/
+/*
+*Server broadcasts name of joined client to all other clients
+*which is received here and received name is passed as argument to AppendMsg function
+*which in turn updates it on the DOM
+*/
 socket.on(`name`,(name)=>{AppendMsg(`${name} joined`)});
 
-/*Listens for typing event which is sent by server to all other clients when a client starts typing*/
+/*
+*Listens for typing event which is sent by server to all other clients when a client starts typing
+*/
 socket.on(`typing`,(name)=>{
     if(typing.classList.contains(`hide`))
     {
@@ -57,7 +67,10 @@ send.addEventListener(`submit`,event=>{
     }
    
 })
-/*Adds a new div on the DOM and writes the data on it which is passed as argument to the function*/
+/*
+*Adds a new div on the DOM and writes the data on it.
+*The data is passed as argument to the function
+*/
 function AppendMsg(data){
     const msgElement=document.createElement(`div`);
     msgElement.innerHTML=data;
