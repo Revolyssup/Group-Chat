@@ -5,12 +5,13 @@
   "main": "new.js",
   "scripts": {
     "devStart": "nodemon server.js",
-    "start" : "node server.js"
+    "start": "node server.js"
   },
   "author": "ashish",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "react": "^16.13.0",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
