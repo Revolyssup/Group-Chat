@@ -4,6 +4,7 @@ const send=document.getElementById(`send-container`)
 const msg=document.getElementById(`message-input`)
 const typing=document.getElementById(`typing`)
 
+
 /*
 *Listens for incoming message from other connected clients 
 *and passes received name and message as argument to AppendMsg function,
@@ -73,8 +74,11 @@ send.addEventListener(`submit`,event=>{
 */
 function AppendMsg(data){
     const msgElement=document.createElement(`div`);
+    const time= new Date();
+    msgElement.setAttribute(`data-time`,time.toLocaleTimeString());
     msgElement.innerHTML=data;
-    msgCont.append(msgElement)
+    msgCont.append(msgElement);
+
 } 
 
 

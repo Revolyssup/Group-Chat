@@ -15,6 +15,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      background-color:rgb(238, 216, 155) ;
     }
 
     #message-container {
@@ -23,8 +24,22 @@
     }
 
     #message-container div {
-      background-color: #CCC;
+      background-color: rgb(223, 112, 48);
       padding: 5px;
+      position: relative;
+    
+    }
+
+    #message-container div:hover::after {
+        content: attr(data-time);
+        display:block;
+        position: absolute;
+        left: 100%;
+        top:-50%;
+        transform: translateY(70%);
+        word-wrap: none;
+        white-space: nowrap;
+        color:red;
     }
 
     #message-container div:nth-child(2n) {
@@ -38,11 +53,18 @@
       max-width: 800px;
       width: 80%;
       display: flex;
+      background-color: rgb(235, 189, 147);
     }
 
     #message-input {
       flex-grow: 1;
     }
+
+    #send-button{
+        
+        background-color: rgb(235, 189, 147); 
+    }
+
     #send-button:hover{
         color:red ;
         background-color:pink   ;
@@ -58,7 +80,6 @@
       margin-right: auto;
    }
     
-   
 
     .hide {
       display: none;
