@@ -6,7 +6,6 @@ var io = require('socket.io')(server);
 
 //maintain an object with socket id as keys and names as values
 const users={};
-
 //serve static files when request is sent to server 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
@@ -31,6 +30,7 @@ function cbOnconnect(socket){
         socket.broadcast.emit(`chat-message`,name, msg)
         console.log(`recieved`)
     })  
+
 
     /*
     *listens for name event (when a client enters the name) 
